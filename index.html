@@ -18,6 +18,17 @@ function initCamera()
 	navigator.camera.getPicture(onSuccess,onFail,{qualiti:80});
 }
 
+function onSuccess(imageURL)
+{
+document.getElementById("pic").src = imageURL;
+//document.getElementById("pic").src = "data:image/jpeg;base64,"+ imageURL;
+}
+
+function onFail(message)
+{
+	//message = reason for failure
+}
+
 function filepicker()
 {	
 	var option = {
@@ -62,7 +73,7 @@ function filepicker()
 
 <div id="Imagebutton">
 <input type="button" value="Take Picture" onclick="initCamera()" /><br/><br/>
-<input type="button" value="From Album " id="filepicker" />
+<input type="button" value="From Album" id="filepicker" />
 </div>
 
 
