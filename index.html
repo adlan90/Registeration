@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="cordova.js"></script>
+<script>
+
+funtion pageLoaded()
+{
+	document.addEventListener("deviceready",phoneReady,false);
+}
+
+function phoneReady()
+{
+}
+
+function initCamera()
+{
+	navigator.camera.getPicture(onSuccess,onFail,{qualiti:80});
+}
+
+function filepicker()
+{	
+	var option = {
+	
+	quality;80,destinationType:DATA_URL,
+	allowEdit:true,
+	encodingType:JPEG,
+	PictureSourceType:PHOTOLIBRARY};
+}
+		
+	
+
+</script>
+<style>
+	#ImageOut
+	{
+		position:absolute;
+		left:0;
+		top:0;
+		height:300px:
+		width:300px:
+	}
+	
+	#Imagebutton
+	{	
+		position:absolute;
+		left:350px;
+		top:100px;
+	}
+	
+	#TextReg
+	{
+		position:absolute;
+		left:0px;
+		top:350px;
+	
+	}
+
+</style>
+</head>
+<body onload="pageLoaded()">
+
+<div id="Imagebutton">
+<input type="button" value="Take Picture" onclick="initCamera()" /><br/><br/>
+<input type="button" value="From Album " id="filepicker" />
+</div>
+
+
+
+<div id="ImageOut">
+<img id="outputPic" height="300px" width="300px" />
+</div>
+
+<div id="TextReg">
+Name : <input type="text" id="name" /><br/><br/>
+Email: <input type="text" id="email"/><br/><br/>
+<input type="button" value="Register" id="register" />
+</div>
+
+</body>
+</html>
