@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="cordova.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 <script>
 
-funtion pageLoaded()
+function pageReady()
 {
-	document.addEventListener("deviceready",phoneReady,false);
+	document.addEventListener("deviceready",initPage,false);
 }
 
-function phoneReady()
+function initPage()
 {
+	document.getElementById("status").innerHTML = "Page ready";
 }
 
-function initCamera()
+function startCam()
 {
-	navigator.camera.getPicture(onSuccess,onFail,{qualiti:80});
+	navigator.camera.getPicture(displayPic,errorPic,{quality:70,destinationType: Camera.DestinationType.DATA_URL});
 }
 
-function onSuccess(imageURL)
+function displayPic(imageURL)
 {
-document.getElementById("pic").src = imageURL;
-//document.getElementById("pic").src = "data:image/jpeg;base64,"+ imageURL;
+	document.getElementById("pix").src = "data:image/jpeg;base64," + imageURL;
 }
 
-function onFail(message)
+function errorPic()
 {
-	//message = reason for failure
 }
 
 function filepicker()
@@ -39,15 +38,14 @@ function filepicker()
 	PictureSourceType:PHOTOLIBRARY};
 }
 		
-	
 
 </script>
 <style>
 	#ImageOut
 	{
 		position:absolute;
-		left:0;
-		top:0;
+		left:10;
+		top:10;
 		height:300px:
 		width:300px:
 	}
@@ -55,37 +53,38 @@ function filepicker()
 	#Imagebutton
 	{	
 		position:absolute;
-		left:350px;
+		left:250px;
 		top:100px;
 	}
 	
 	#TextReg
 	{
 		position:absolute;
-		left:0px;
-		top:350px;
+		left:10px;
+		top:250px;
 	
 	}
+	
+	
 
 </style>
 </head>
-<body onload="pageLoaded()">
+<body onload="pageReady">
 
 <div id="Imagebutton">
-<input type="button" value="Take Picture" onclick="initCamera()" /><br/><br/>
+<input type="button" value="Take Picture" onclick="startCam()" /><br/><br/>
 <input type="button" value="From Album" id="filepicker" />
 </div>
 
 
-
 <div id="ImageOut">
-<img id="outputPic" height="300px" width="300px" />
+<img id="outputPic" height="200px" width="200px" src="" />
 </div>
 
 <div id="TextReg">
-Name : <input type="text" id="name" /><br/><br/>
-Email: <input type="text" id="email"/><br/><br/>
-<input type="button" value="Register" id="register" />
+Name : <input type="text" id="name" required="required" pattern="^[a-z A-Z]$" /><br/><br/>
+Email: <input type="text" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" /><br/><br/>
+<input type="button" value="Register" id="register" onclick="register"/>
 </div>
 
 </body>
